@@ -10,3 +10,8 @@ Route::prefix('products')->group(function () {
     // GET /api/products/{id}
     Route::get('{id}', [ProductController::class, 'show']);
 });
+
+
+Route::get('/test', function () {
+    return response()->json(['message' => 'API is working!']);
+});
