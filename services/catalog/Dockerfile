@@ -13,4 +13,4 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 
 EXPOSE 8000
 
-CMD php -S 0.0.0.0:8000 -t public server.php
+CMD php -S 0.0.0.0:8000 -t public
