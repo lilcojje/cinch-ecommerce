@@ -1,25 +1,15 @@
-# services/*/Dockerfile
 FROM php:8.2-fpm
-
-# system deps
-RUN apt-get update && apt-get install -y \
-    git zip unzip libzip-dev libonig-dev libpng-dev libxml2-dev libcurl4-openssl-dev \
-    && docker-php-ext-install pdo_mysql mbstring zip exif pcntl bcmath
-
-# install composer
-COPY --from=composer:2.6 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# copy app
-COPY src/ /var/www/html
+RUN apt-get update && apt-get install -y \
+    zip unzip git curl libpng-dev libonig-dev libxml2-dev libzip-dev \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
-# install deps
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+COPY . .
 
-# storage permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+RUN curl -sS https://getcomposer.org/installer | php && \
+    php composer.phar install --no-dev --optimize-autoloader
 
-EXPOSE 9000
-
-CMD ["php-fpm"]
+EXPOSE 8000
+CMD php artisan serve --host=0.0.0.0 --port=8000
