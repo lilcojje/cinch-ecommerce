@@ -12,4 +12,4 @@ RUN curl -sS https://getcomposer.org/installer | php && \
     php composer.phar install --no-dev --optimize-autoloader
 
 EXPOSE 8001
-CMD php artisan serve --host=0.0.0.0 --port=8001
+CMD php -S 0.0.0.0:8001 -t public server.php
