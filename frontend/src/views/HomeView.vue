@@ -19,7 +19,7 @@ import axios from 'axios'
 const products = ref([])
 
 onMounted(async () => {
-  const { data } = await axios.get('http://localhost:8000/api/products')
+  const { data } = await axios.get('http://54.206.134.205:8000/api/products')
   products.value = data.data ?? data
 })
 </script>

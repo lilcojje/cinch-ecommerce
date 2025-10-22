@@ -35,7 +35,7 @@ async function placeOrder() {
     }))
   }
 
-  await axios.post('http://localhost:8001/api/orders', payload)
+  await axios.post('http://54.206.134.205:8001/api/orders', payload)
   alert('Order placed successfully!')
   localStorage.removeItem('cart')
 }

@@ -18,7 +18,7 @@ const router = useRouter()
 const product = ref(null)
 
 onMounted(async () => {
-  const { data } = await axios.get(`http://localhost:8000/api/products/${route.params.id}`)
+  const { data } = await axios.get(`http://54.206.134.205:8000/api/products/${route.params.id}`)
   product.value = data
 })
 
