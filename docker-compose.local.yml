@@ -1,0 +1,72 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cinchdb
+      MYSQL_USER: cinch
+      MYSQL_PASSWORD: cinch
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+  catalog:
+    build: ./services/catalog
+    volumes:
+      - ./services/catalog/src:/var/www/html
+    environment:
+      DB_HOST: db
+      DB_DATABASE: cinchdb
+      DB_USERNAME: cinch
+      DB_PASSWORD: cinch
+      MAIL_MAILER: smtp
+      MAIL_HOST: mailhog
+      MAIL_PORT: 1025
+    depends_on:
+      - db
+      - mailhog
+
+  checkout:
+    build: ./services/checkout
+    volumes:
+      - ./services/checkout/src:/var/www/html
+    environment:
+      DB_HOST: db
+      DB_DATABASE: cinchdb
+      DB_USERNAME: cinch
+      DB_PASSWORD: cinch
+      SQS_ENDPOINT: http://localstack:4566
+      MAIL_MAILER: smtp
+      MAIL_HOST: mailhog
+      MAIL_PORT: 1025
+    depends_on:
+      - db
+      - mailhog
+
+  email:
+    build: ./services/email
+    volumes:
+      - ./services/email/src:/var/www/html
+    environment:
+      DB_HOST: db
+      DB_DATABASE: cinchdb
+      DB_USERNAME: cinch
+      DB_PASSWORD: cinch
+      SQS_ENDPOINT: http://localstack:4566
+      MAIL_MAILER: smtp
+      MAIL_HOST: mailhog
+      MAIL_PORT: 1025
+    depends_on:
+      - db
+      - mailhog
+
+volumes:
+  dbdata:
