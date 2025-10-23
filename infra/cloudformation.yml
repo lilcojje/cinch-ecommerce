@@ -4,7 +4,6 @@ Description: Cinch E-Commerce Microservices Stack
 Parameters:
   KeyName:
     Type: AWS::EC2::KeyPair::KeyName
-  # ... other parameters ...
 
 Mappings:
   RegionMap:
@@ -14,7 +13,7 @@ Mappings:
       AMI: ami-0c7217cdde317cfec
 
 Resources:
-  # 1️⃣ VPC + Network
+  # VPC + Network
   VPC:
     Type: AWS::EC2::VPC
     Properties:
@@ -75,7 +74,7 @@ Resources:
           ToPort: 80
           CidrIp: 0.0.0.0/0
 
-  # 2️⃣ Database
+  # Database
   DBSubnetGroup:
     Type: AWS::RDS::DBSubnetGroup
     Properties:
@@ -96,7 +95,7 @@ Resources:
       VPCSecurityGroups: [!Ref InstanceSecurityGroup]
       PubliclyAccessible: true
 
-  # 3️⃣ Backend Instance
+  # Backend Instance
   EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
@@ -114,7 +113,7 @@ Resources:
         - Key: Name
           Value: CinchBackend
 
-  # 4️⃣ Frontend Instance
+  # Frontend Instance
   FrontendInstance:
     Type: AWS::EC2::Instance
     Properties:
