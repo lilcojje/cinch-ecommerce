@@ -8,6 +8,14 @@ Simple e-commerce microservices:
 
 Tech: PHP (Laravel), Vue.js (frontend), MySQL, Docker, AWS EC2, CloudFormation.
 
+Frontend url: http://54.206.134.205/
+
+API
+Catalog: http://54.206.134.205:8000
+Checkout: http://54.206.134.205:8001
+Email: http://54.206.134.205:8002
+
+
 ## Repo structure
 
 cinch-coding-assignment/
@@ -25,7 +33,7 @@ cinch-coding-assignment/
 │  └─ email/                     # Laravel app
 │     ├─ Dockerfile
 │     └─ src/
-├─ docker-compose.local.yml
+├─ docker-compose.yml
 ├─ frontend/
 └─ scripts/
    └─ ec2-user-data.sh           # optional: for EC2 user data to pull repo & run docker-compose
