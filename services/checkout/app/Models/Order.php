@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 class Order extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = [
         'order_number',
@@ -17,6 +18,7 @@ class Order extends Model
         'customer_email',
         'total_amount',
     ];
+
 
     public function items()
     {
