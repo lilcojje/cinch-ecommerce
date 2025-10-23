@@ -23,7 +23,8 @@ class OrderSummaryMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Your Order Confirmation')
+        return $this->from('admin@kagay-an.ph', config('app.name'))
+                    ->subject(config('app.name') . ' | Your Order Confirmation')
                     ->view('emails.order_summary');
     }
 }
