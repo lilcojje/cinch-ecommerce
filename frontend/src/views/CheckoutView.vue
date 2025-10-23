@@ -203,3 +203,162 @@ async function placeOrder() {
 </script>
 
 
+
+<style scoped>
+.checkout-container {
+  padding: 3rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fafafa;
+  border-radius: 16px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.cart-table th {
+  background: #f4f4f4;
+  padding: 1rem;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.cart-table td {
+  padding: 0.75rem;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.cart-table input[type="number"] {
+  width: 70px;
+  padding: 0.4rem;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: border 0.2s ease;
+}
+
+.cart-table input[type="number"]:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.checkout-btn {
+  background: linear-gradient(135deg, #4f46e5, #6d28d9);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+}
+
+.checkout-btn:hover {
+  background: linear-gradient(135deg, #4338ca, #5b21b6);
+  transform: translateY(-2px);
+}
+
+.back-btn {
+  background: #6c757d;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+}
+
+.back-btn:hover {
+  background: #5a6268;
+}
+
+.remove-btn {
+  background: transparent;
+  color: #dc2626;
+  font-size: 1.2rem;
+}
+
+.remove-btn:hover {
+  transform: scale(1.2);
+}
+
+.summary-card {
+  margin-top: 2rem;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.totals {
+  text-align: right;
+  font-size: 1.05rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.customer-info {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.customer-info label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #444;
+}
+
+.customer-info input {
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: border 0.2s ease;
+}
+
+.customer-info input:focus {
+  border-color: #6366f1;
+  outline: none;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.empty-cart p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+</style>
