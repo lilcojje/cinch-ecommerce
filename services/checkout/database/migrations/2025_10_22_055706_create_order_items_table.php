@@ -19,6 +19,7 @@ return new class extends Migration
 			$table->decimal('unit_price', 10, 2);
 			$table->decimal('subtotal', 12, 2);
 			$table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->timestamps();
 		});
 
     }

@@ -9,27 +9,45 @@ class OrderController extends Controller
 {
     // Create a new order
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'user_id' => 'required|integer',
-            'items'   => 'required|array',
-            'items.*.product_id' => 'required|integer',
-            'items.*.quantity'   => 'required|integer|min:1',
-            'total_amount' => 'required|numeric|min:0',
+{
+    $validated = $request->validate([
+        'customer_name' => 'required|string|max:255',
+        'customer_email' => 'required|email',
+        'total_amount' => 'required|numeric',
+        'items' => 'required|array|min:1',
+    ]);
+
+    // Generate unique order number
+    $lastOrder = Order::orderByRaw('CAST(SUBSTRING(order_number, 5) AS UNSIGNED) DESC')->first();
+
+	$nextNumber = $lastOrder
+		? intval(substr($lastOrder->order_number, 4)) + 1
+		: 1;
+
+	$orderNumber = 'ORD-' . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
+
+	$order = Order::create([
+		'order_number' => $orderNumber,
+		'customer_name' => $validated['customer_name'],
+		'customer_email' => $validated['customer_email'],
+		'total_amount' => $validated['total_amount'],
+	]);
+
+    foreach ($validated['items'] as $item) {
+        $order->items()->create([
+            'product_id' => $item['product_id'],
+            'quantity' => $item['quantity'],
+            'unit_price' => $item['unit_price'],
+            'subtotal' => $item['subtotal'],
         ]);
-
-        $order = Order::create([
-            'user_id' => $validated['user_id'],
-            'total_amount' => $validated['total_amount'],
-        ]);
-
-        // Normally you'd also create order_items here
-        foreach ($validated['items'] as $item) {
-            $order->items()->create($item);
-        }
-
-        return response()->json($order, 201);
     }
+
+    return response()->json([
+        'message' => 'Order created successfully',
+        'order_number' => $orderNumber,
+    ]);
+}
+
 
     // Get order details
     public function show($id)

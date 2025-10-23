@@ -3,10 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 
-Route::prefix('orders')->group(function () {
-    // POST /api/orders — create order
-    Route::post('/', [OrderController::class, 'store']);
+use App\Http\Controllers\EmailController;
 
-    // GET /api/orders/{id} — order details
-    Route::get('{id}', [OrderController::class, 'show']);
-});
+Route::post('/email-user', [EmailController::class, 'sendOrderSummary']);

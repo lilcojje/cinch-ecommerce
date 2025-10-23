@@ -5,19 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\DB;
+
 class Order extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'order_number',
+        'customer_name',
+        'customer_email',
         'total_amount',
-        'status',
     ];
 
-    // One order has many items
     public function items()
     {
         return $this->hasMany(OrderItem::class);
     }
 }
+
